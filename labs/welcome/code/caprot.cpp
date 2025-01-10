@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
 	}
 
 	// Variables
-	int numRotate = argc[1], temp;
+	int numRotate = stoi(argv[1]), temp;
 	string line;
 	bool * capitalize;
 
@@ -27,10 +27,10 @@ int main(int argc, char *argv[]){
 	}
 	
 	// Capitalize
-	for(int i = 0; i < line.size(); i++){
+	for(int i = 0; i < int(line.size()); i++){
 		temp = i + numRotate;
 		while(temp <= 0){ temp += line.size(); } // Negative Wrapping
-		while(temp >= line.size()){ temp -= line.size(); } // Wrapping
+		while(temp >= int(line.size())){ temp -= line.size(); } // Wrapping
 
 		if(capitalize[i]){
 			line[temp] = toupper(line[temp]);
