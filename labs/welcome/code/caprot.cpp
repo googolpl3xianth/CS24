@@ -18,7 +18,9 @@ int main(int argc, char *argv[]){
 
 	// Get input
 	getline(cin, line);
-    numRotate %= line.size(); // simplify numRotate
+    if(numRotate < 0){ numRotate = -1 * ( (-1 * numRotate) % line.size()); }
+    else{ numRotate %= line.size(); } // simplify numRotate
+    cout << numRotate << endl;
 
 	// Loop through line to save capitalizations
 	for(int i = 0; i < int(line.size()); i++){
