@@ -21,15 +21,15 @@ int main(int argc, char *argv[]){
     numRotate %= line.size(); // simplify numRotate
 
 	// Loop through line to save capitalizations
-	for(int i = line.size()-1; i >= 0; i--){
+	for(int i = 0; i < int(line.size()); i++){
 		if(isupper(line[i])){
-			capitalize.push_back(1);
+			capitalize.push_back(true);
 		}
         else{
-            capitalize.push_back(0);
+            capitalize.push_back(false);
         }
 	}
-	
+
 	// Capitalize
 	for(int i = 0; i < int(line.size()); i++){
 		temp = i + numRotate;
