@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib> // for exit
+using namespace std;
 
 int main(int argc, char *argv[]){
 	// Check correct arguments
@@ -12,28 +13,30 @@ int main(int argc, char *argv[]){
 	// Variables
 	int numRotate = argc[1], temp;
 	string line;
-	bool *capitalize = new bool[numRotate];
+	bool * capitalize;
 
 	// Get input
 	cin >> line;
+	capitalize = new bool[line.size()];
 
 	// Loop through line to save capitalizations
-	for(int i = line.size()-1; i >= 0 i--){
+	for(int i = line.size()-1; i >= 0; i--){
 		if(isupper(line[i])){
 			capitalize[i] = 1;
 		}
 	}
 	
 	// Capitalize
-	for(int i = 0; i < capitalize.size(); i++){
+	for(int i = 0; i < line.size(); i++){
 		temp = i + numRotate;
-		if(temp >= size){ temp -= size; } // Wrapping
+		while(temp <= 0){ temp += line.size(); } // Negative Wrapping
+		while(temp >= line.size()){ temp -= line.size(); } // Wrapping
 
 		if(capitalize[i]){
-			toupper(line[i+numRotate]);
+			line[temp] = toupper(line[temp]);
 		}
 		else{
-			tolower(line[i+numRotate]);
+			line[temp] = tolower(line[temp]);
 		}
 	}
 
@@ -41,7 +44,7 @@ int main(int argc, char *argv[]){
 	cout << line << endl;
 
 	// Cleanup
-	delete capitalize[];
+	delete[] capitalize;
 
 	return 0;
 }
