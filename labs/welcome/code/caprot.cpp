@@ -18,9 +18,8 @@ int main(int argc, char *argv[]){
 
 	// Get input
 	getline(cin, line);
-    if(numRotate < 0){ numRotate = -1 * ( (-1 * numRotate) % line.size()); }
+    if(numRotate < 0){ numRotate = -1 * ( (-1 * numRotate) % line.size()); } // Deal with negative mod
     else{ numRotate %= line.size(); } // simplify numRotate
-    cout << numRotate << endl;
 
 	// Loop through line to save capitalizations
 	for(int i = 0; i < int(line.size()); i++){
