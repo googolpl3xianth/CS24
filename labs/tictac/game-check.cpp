@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     while(line != ""){
         std::getline(std::cin, line);
         try{
-            if(std::cin.eof()){ newGame.checkState(); return 0; }
+            if(line == ""){ newGame.checkState(); return 0; }
             Move newMove(line);
             try{
                 newGame.addMove(newMove);
