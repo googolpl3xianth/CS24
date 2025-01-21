@@ -2,8 +2,22 @@
 #define BOARD_H
 
 #include "Move.h"
+#include <iostream>
 
-// I recommended writing a Board class to manage your game state.
-// Here's some space for the class definition; member functions go in Board.cpp.
+class Board{
+    const int numCol = 3, numRow = 3;
+    int turnNum;
+    char turn;
+    char grid[3][3]; // (col, row)
+
+    public:
+        Board();
+        char getTurn();
+        void printGrid();
+        void checkState();
+        void addMove(Move newMove);
+    private:
+        char checkWin();
+};
 
 #endif
