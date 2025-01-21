@@ -58,8 +58,7 @@ void Board::addMove(Move newMove){
         }
     }
     else{
-        //throw InvalidMove("Game already over");
-	throw ParseError("Test");
+        throw InvalidMove("Game already over");
     }
 }
 
