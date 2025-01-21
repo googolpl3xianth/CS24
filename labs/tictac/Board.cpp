@@ -45,7 +45,7 @@ void Board::addMove(Move newMove){
         throw InvalidMove("Out of turn");
     }
     if(turn == 'X'){ turn = 'O'; }
-    else{                 turn = 'X'; }
+    else{            turn = 'X'; }
 
     if(newMove.number != ++turnNum){ throw InvalidMove("Move number invalid"); }
 
