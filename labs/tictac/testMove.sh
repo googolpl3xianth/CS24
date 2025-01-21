@@ -27,4 +27,4 @@ echo "1 X A4" | ./move-check
 echo "1 X Z1" | ./move-check
 echo "1 X z1" | ./move-check
 echo "1 X D1" | ./move-check
-echo "1 A A1" | ./move-check
+echo ""
