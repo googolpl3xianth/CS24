@@ -55,6 +55,6 @@ Move::Move(const std::string& input){
 }
 
 std::string Move::to_string() const{
-    std::string moveText = std::to_string(this->number) + " " + this->player + " " + char(row + 65) + std::to_string(column);
+    std::string moveText = std::to_string(this->number) + " " + this->player + " " + char(row + 65) + std::to_string(column + 1);
     return moveText;
 }
