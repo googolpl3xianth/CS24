@@ -45,13 +45,14 @@ Move::Move(const std::string& input){
                 else{throw ParseError("Invalid space formating");}
             case 7:
                 if(std::isspace(inputReader)){break;}
-                if(!std::isspace(input[i-1]) || inputReader != '#'){throw ParseError("Invalid Commet");}
+                if(!std::isspace(input[i-1]) || inputReader != '#'){throw ParseError("Invalid Comment");}
                 if(i+1 < int(input.size())){
                     comment = input.std::string::substr(i+1);
                 }
                 return;
         }
     }
+    if(arg < 6){throw ParseError("Invalid amount of arguments");}
 }
 
 std::string Move::to_string() const{
