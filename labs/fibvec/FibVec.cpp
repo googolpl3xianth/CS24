@@ -14,16 +14,16 @@ FibVec::~FibVec(){
     delete [] _vec;
 }
 
-int FibVec::capacity(){ return _cap; }
+size_t FibVec::capacity() const { return _cap; }
 
-int FibVec::count(){ return _size; };
+size_t FibVec::count() const { return _size; };
 
-void FibVec::insert(int value, int index){
-    if(index > _size || index < 0){ throw std::out_of_range("Insertion failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
+void FibVec::insert(int value, size_t index){
+    if(index > _size){ throw std::out_of_range("Insertion failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
 
     upCap();
     
-    for(int i = _size; i > index; i--){
+    for(size_t i = _size; i > index; i--){
         _vec[i] = _vec[i-1];
     }
 
@@ -31,7 +31,7 @@ void FibVec::insert(int value, int index){
     _size++;
 }
 
-int FibVec::lookup(int index){ if(index > _size || index < 0){ throw std::out_of_range("Lookup failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); } return _vec[index]; }
+int FibVec::lookup(size_t index) const { if(index > _size){ throw std::out_of_range("Lookup failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); } return _vec[index]; }
 
 int FibVec::pop(){
     if(_size == 0){ throw std::underflow_error("Pop failed, vector empty"); }
@@ -44,12 +44,12 @@ void FibVec::push(int value){
     _size++;
 }
 
-int FibVec::remove(int index){
-    if(index > _size || index < 0){ throw std::out_of_range("Remove failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
+int FibVec::remove(size_t index){
+    if(index > _size){ throw std::out_of_range("Remove failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
 
     int temp = _vec[index];
 
-    for(int i = index; i < _size-1; i++){
+    for(size_t i = index; i < _size-1; i++){
         _vec[i] = _vec[i+1];
     }
 
@@ -57,12 +57,12 @@ int FibVec::remove(int index){
     return temp;
 }
 
-void FibVec::print(){
+void FibVec::print() const {
     std::cout << "[";
-    for(int i = 0; i < _size-1; i++){
-        std::cout << std::to_string(_vec[i]) << ", ";
-    }
-    if(_size > 0){
+    if(_size != 0){
+        for(size_t i = 0; i < _size-1; i++){
+            std::cout << std::to_string(_vec[i]) << ", ";
+        }
         std::cout << std::to_string(_vec[_size-1]);
     }
     std::cout << "] " << "Capacity: " << std::to_string(_cap) << std::endl;
@@ -75,7 +75,7 @@ void FibVec::upCap(){
         _prevCap = temp;
     
         int *tempVec = new int[_cap];
-        for(int i = 0; i < _size; i++){
+        for(size_t i = 0; i < _size; i++){
             tempVec[i] = _vec[i];
         }
 
