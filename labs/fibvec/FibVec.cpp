@@ -21,7 +21,7 @@ size_t FibVec::count() const { return _size; };
 void FibVec::insert(int value, size_t index){
     if(index > _size){ throw std::out_of_range("Insertion failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
 
-    upCap();
+    fibCap(true);
     
     for(size_t i = _size; i > index; i--){
         _vec[i] = _vec[i-1];
@@ -36,10 +36,11 @@ int FibVec::lookup(size_t index) const { if(index > _size){ throw std::out_of_ra
 int FibVec::pop(){
     if(_size == 0){ throw std::underflow_error("Pop failed, vector empty"); }
     else{ _size--; return _vec[_size]; }
+    fibCap(false);
 }
 
 void FibVec::push(int value){
-    upCap();
+    fibCap(true);
     _vec[_size] = value;
     _size++;
 }
@@ -54,6 +55,7 @@ int FibVec::remove(size_t index){
     }
 
     _size--;
+    fibCap(false);
     return temp;
 }
 
@@ -68,18 +70,33 @@ void FibVec::print() const {
     std::cout << "] " << "Capacity: " << std::to_string(_cap) << std::endl;
 }
 
-void FibVec::upCap(){
-    if(_size >= _cap){
-        int temp = _cap;
-        _cap += _prevCap;
-        _prevCap = temp;
+void FibVec::fibCap(bool up){
+    if(up){
+        if(_size >= _cap){
+            _cap += _prevCap;
+            _prevCap = _cap - _prevCap;
     
-        int *tempVec = new int[_cap];
-        for(size_t i = 0; i < _size; i++){
-            tempVec[i] = _vec[i];
-        }
+            int *tempVec = new int[_cap];
+            for(size_t i = 0; i < _size; i++){
+                tempVec[i] = _vec[i];
+            }
 
-        delete [] _vec;
-        _vec = tempVec;
+            delete [] _vec;
+            _vec = tempVec;
+        }
+    }
+    else{
+        if(_size < _cap - _prevCap){
+            _cap -= _prevCap;
+            _prevCap -= _cap;
+
+            int *tempVec = new int[_cap];
+            for(size_t i = 0; i < _size; i++){
+                tempVec[i] = _vec[i];
+            }
+
+            delete [] _vec;
+            _vec = tempVec;
+        }
     }
 }

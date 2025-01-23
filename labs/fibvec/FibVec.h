@@ -8,7 +8,7 @@ class FibVec {
     int *_vec;
     size_t _size, _cap, _prevCap;
 
-    void upCap();
+    void fibCap(bool up);
 
 public:
     FibVec();
