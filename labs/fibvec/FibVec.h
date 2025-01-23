@@ -5,15 +5,22 @@
 #include <cstddef>
 
 class FibVec {
-  // Member Variables
+    int *_vec, _size, _cap, _prevCap;
 
-  // Helper Functions
+    void upCap();
 
 public:
-  // Constructor and Destructor
+    FibVec();
+    ~FibVec();
 
-  // Member Functions
-
+    int capacity();
+    int count();
+    void insert(int value, int index);
+    int lookup(int index);
+    int pop();
+    void push(int value);
+    int remove(int index);
+    void print();
 };
 
 #endif
