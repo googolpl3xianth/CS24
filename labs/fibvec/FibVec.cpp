@@ -66,7 +66,7 @@ void FibVec::push(int value){
 }
 
 int FibVec::remove(size_t index){
-    if(index > _size){ throw std::out_of_range("Remove failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
+    if(index >= _size){ throw std::out_of_range("Remove failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
 
     int temp = _vec[index];
 

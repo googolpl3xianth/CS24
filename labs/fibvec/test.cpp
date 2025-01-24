@@ -7,16 +7,11 @@
 int main() {
     FibVec fibvec(true);
     
-    fibvec.print();
     fibvec.push(0);
     fibvec.push(1);
     fibvec.push(5);
     fibvec.push(12);
     fibvec.push(22);
-    fibvec.print();
-    fibvec.lookup(4);
-    try{fibvec.lookup(5);} 
-    catch(const std::out_of_range& e){ std::cout << "Error: " << e.what() << std::endl; }
     fibvec.push(35);
     fibvec.push(51);
     fibvec.push(70);
@@ -25,7 +20,14 @@ int main() {
     fibvec.push(145);
     fibvec.push(176);
     fibvec.print();
-    fibvec.lookup(11);
+
+    try{fibvec.remove(12);} 
+    catch(const std::out_of_range& e){ std::cout << "Error: " << e.what() << std::endl; }
+    try{fibvec.remove(0);} 
+    catch(const std::out_of_range& e){ std::cout << "Error: " << e.what() << std::endl; }
+
+    fibvec.print();
+
 
 
 
