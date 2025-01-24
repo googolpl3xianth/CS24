@@ -7,6 +7,13 @@
 int main() {
     FibVec fibvec;
 
+    fibvec.push(100);
+    fibvec.push(200);
+    fibvec.print();
+    fibvec.pop();
+    fibvec.pop();
+    fibvec.print();
+
     /*fibvec.push(1);
     fibvec.print();
     fibvec.push(2);
@@ -22,7 +29,7 @@ int main() {
     fibvec.push(7);
     fibvec.print();*/
 
-    std::cout << "Count: " << std::to_string(fibvec.count()) << std::endl;
+    /*std::cout << "Count: " << std::to_string(fibvec.count()) << std::endl;
     std::cout << "Capacity: " << std::to_string(fibvec.capacity()) << std::endl;
     fibvec.print();
     fibvec.insert(1, 0);
@@ -55,7 +62,7 @@ int main() {
     fibvec.insert(1, 0);
     fibvec.print();
     fibvec.remove(1);
-    fibvec.print();
+    fibvec.print();*/
 
 
 

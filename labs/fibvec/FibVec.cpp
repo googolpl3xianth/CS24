@@ -35,8 +35,7 @@ int FibVec::lookup(size_t index) const { if(index > _size){ throw std::out_of_ra
 
 int FibVec::pop(){
     if(_size == 0){ throw std::underflow_error("Pop failed, vector empty"); }
-    else{ _size--; return _vec[_size]; }
-    fibCap(false);
+    else{ _size--; fibCap(false); return _vec[_size]; }
 }
 
 void FibVec::push(int value){
@@ -67,7 +66,7 @@ void FibVec::print() const {
         }
         std::cout << std::to_string(_vec[_size-1]);
     }
-    std::cout << "] " << "Capacity: " << std::to_string(_cap) << std::endl;
+    std::cout << "] " << "Capacity: " << std::to_string(_cap) << " Size: " << std::to_string(_size) << std::endl;
 }
 
 void FibVec::fibCap(bool up){
