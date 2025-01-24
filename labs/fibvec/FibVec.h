@@ -7,11 +7,13 @@
 class FibVec {
     int *_vec;
     size_t _size, _cap, _prevCap;
+    bool _verbose;
 
     void fibCap(bool up);
 
 public:
     FibVec();
+    FibVec(bool v);
     ~FibVec();
 
     size_t capacity() const;

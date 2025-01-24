@@ -7,6 +7,14 @@ FibVec::FibVec(){
     _size = 0;
     _cap = 1;
     _prevCap = 1;
+    _verbose = false;
+    _vec = new int[_cap];
+}
+FibVec::FibVec(bool v){
+    _size = 0;
+    _cap = 1;
+    _prevCap = 1;
+    _verbose = v;
     _vec = new int[_cap];
 }
 
@@ -31,11 +39,24 @@ void FibVec::insert(int value, size_t index){
     _size++;
 }
 
-int FibVec::lookup(size_t index) const { if(index > _size){ throw std::out_of_range("Lookup failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); } return _vec[index]; }
+int FibVec::lookup(size_t index) const { 
+    if(index >= _size){ throw std::out_of_range("Lookup failed, size: " + std::to_string(_size) + " index: " + std::to_string(index)); }
+    if(_verbose){ std::cout << "fibvec[" << std::to_string(index) << "] = " << std::to_string(_vec[index]) << std::endl;}
+    return _vec[index]; 
+}
 
 int FibVec::pop(){
     if(_size == 0){ throw std::underflow_error("Pop failed, vector empty"); }
-    else{ _size--; fibCap(false); return _vec[_size]; }
+    else{ 
+        _size--; 
+        int temp = _vec[_size];
+        fibCap(false); 
+        if(_verbose){
+            std::cout << "popped " << std::to_string(temp) << std::endl;
+            print();
+        }
+        return temp; 
+    }
 }
 
 void FibVec::push(int value){
@@ -59,14 +80,13 @@ int FibVec::remove(size_t index){
 }
 
 void FibVec::print() const {
-    std::cout << "[";
+    std::cout << "[" << std::to_string(_size) << "/" << std::to_string(_cap) << "]: ";
     if(_size != 0){
-        for(size_t i = 0; i < _size-1; i++){
-            std::cout << std::to_string(_vec[i]) << ", ";
+        for(size_t i = 0; i < _size; i++){
+            std::cout << std::to_string(_vec[i]) << " ";
         }
-        std::cout << std::to_string(_vec[_size-1]);
     }
-    std::cout << "] " << "Capacity: " << std::to_string(_cap) << " Size: " << std::to_string(_size) << std::endl;
+    std::cout << std::endl;
 }
 
 void FibVec::fibCap(bool up){
@@ -86,8 +106,8 @@ void FibVec::fibCap(bool up){
     }
     else{
         if(_size < _cap - _prevCap){
+            _prevCap = _cap - _prevCap
             _cap -= _prevCap;
-            _prevCap -= _cap;
 
             int *tempVec = new int[_cap];
             for(size_t i = 0; i < _size; i++){

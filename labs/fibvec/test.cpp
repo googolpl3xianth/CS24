@@ -5,14 +5,36 @@
 // This file won't be graded - do whatever you want.
 
 int main() {
-    FibVec fibvec;
+    FibVec fibvec(true);
+    
+    fibvec.print();
+    fibvec.push(0);
+    fibvec.push(1);
+    fibvec.push(5);
+    fibvec.push(12);
+    fibvec.push(22);
+    fibvec.print();
+    fibvec.lookup(4);
+    try{fibvec.lookup(5);} 
+    catch(const std::out_of_range& e){ std::cout << "Error: " << e.what() << std::endl; }
+    fibvec.push(35);
+    fibvec.push(51);
+    fibvec.push(70);
+    fibvec.push(92);
+    fibvec.push(117);
+    fibvec.push(145);
+    fibvec.push(176);
+    fibvec.print();
+    fibvec.lookup(11);
 
+
+
+    /*
     fibvec.push(100);
     fibvec.push(200);
     fibvec.print();
     fibvec.pop();
-    fibvec.pop();
-    fibvec.print();
+    fibvec.pop();*/
 
     /*fibvec.push(1);
     fibvec.print();
