@@ -106,7 +106,7 @@ void FibVec::fibCap(bool up){
     }
     else{
         if(_size < _cap - _prevCap){
-            _prevCap = _cap - _prevCap
+            _prevCap = _cap - _prevCap;
             _cap -= _prevCap;
 
             int *tempVec = new int[_cap];
