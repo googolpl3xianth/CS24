@@ -5,9 +5,22 @@
 // This file won't be graded - do whatever you want.
 
 int main() {
-  List list;
+    List list;
+        
 
-  std::cout << "This program doesn't do anything interesting yet...\n";
+    list.insert("Clotho");
+    list.insert("Lachesis");
+    list.insert("Atropos");
+    list.insert("Clotho");
+    list.insert("Lachesis");
+    list.insert("Atropos");
 
-  return 0;
+    list.print();
+
+    std::cout << list.remove("Clotho") << std::endl;
+
+    list.print();
+    
+
+    return 0;
 }
