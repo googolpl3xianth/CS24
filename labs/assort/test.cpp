@@ -11,16 +11,12 @@ int main() {
     list.insert("Clotho");
     list.insert("Lachesis");
     list.insert("Atropos");
-    list.insert("Clotho");
-    list.insert("Lachesis");
-    list.insert("Atropos");
 
     list.print();
-
-    std::cout << list.remove("Clotho") << std::endl;
-
+    List copy(list);
+    copy.print();
     list.print();
     
-
+    
     return 0;
 }

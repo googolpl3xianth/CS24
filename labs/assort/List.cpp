@@ -2,17 +2,24 @@
 #include <iostream>
 using namespace std;
 
+/*
+*Node deleteNode(Node &nodeIndex){
+    if(nodeIndex)
+    delete deleteNode(nodeIndex);
+}*/
+
 List::List(){
     head = NULL;
 }
+
 List::List(const List& other){
     if(other.head == NULL){ // empty list
         head = NULL;
         return;
     }
-    Node newHead;
-    head = &newHead;
-    newHead.data = other.head->data; // copy head
+    Node *newHead = new Node;
+    head = newHead;
+    newHead->data = other.head->data; // copy head
     
     if(other.head->next == NULL){ // if just head
         return;
@@ -20,17 +27,18 @@ List::List(const List& other){
 
     Node *nodeIndex = other.head->next, *copyIndex = head;
 
-    while(nodeIndex->next != NULL){
-        Node newNode;
-        newNode.data = nodeIndex->data;
-        copyIndex->next = &newNode;
-        copyIndex = &newNode;
+    while(nodeIndex->next != NULL){ // body
+        Node *newNode = new Node;
+        newNode->data = nodeIndex->data;
+        copyIndex->next = newNode;
+        copyIndex = newNode;
         nodeIndex = nodeIndex->next;
     }
-    Node newNode;
-    newNode.data = nodeIndex->data;
-    newNode.next = NULL;
-    copyIndex->next = &newNode;
+    
+    Node *newNode = new Node; // tail
+    newNode->data = nodeIndex->data;
+    newNode->next = NULL;
+    copyIndex->next = newNode;
 }
 
 List::~List(){
@@ -38,11 +46,12 @@ List::~List(){
         return;
     }
     Node *nodeIndex = head->next, *temp = head;
-    while(nodeIndex != NULL){
+    do{ 
         delete temp;
         temp = nodeIndex;
         nodeIndex = nodeIndex->next;
-    }
+    } while(nodeIndex != NULL);
+    delete temp;
 }
 
 size_t List::count() const{
