@@ -2,11 +2,6 @@
 #include <iostream>
 using namespace std;
 
-/*
-*Node deleteNode(Node &nodeIndex){
-    if(nodeIndex)
-    delete deleteNode(nodeIndex);
-}*/
 
 List::List(){
     head = NULL;
@@ -22,6 +17,7 @@ List::List(const List& other){
     newHead->data = other.head->data; // copy head
     
     if(other.head->next == NULL){ // if just head
+        head->next = NULL;
         return;
     }
 
@@ -43,6 +39,10 @@ List::List(const List& other){
 
 List::~List(){
     if(head == NULL){
+        return;
+    }
+    else if(head->next == NULL){
+        delete head;
         return;
     }
     Node *nodeIndex = head->next, *temp = head;

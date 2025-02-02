@@ -9,8 +9,6 @@ int main() {
         
 
     list.insert("Clotho");
-    list.insert("Lachesis");
-    list.insert("Atropos");
 
     list.print();
     List copy(list);
