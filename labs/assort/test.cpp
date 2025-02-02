@@ -6,15 +6,16 @@
 
 int main() {
     List list;
-        
-
-    list.insert("Clotho");
-
-    list.print();
-    List copy(list);
-    copy.print();
-    list.print();
     
+    list.insert("Atropos");
+    list.insert("Clotho");
+    list.insert("Lachesis");
+    list.print(); 
+    
+    list.remove("No");
+    //list.remove("Macavity");
+    //list.remove("");
+    //list.print();
     
     return 0;
 }

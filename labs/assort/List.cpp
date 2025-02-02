@@ -184,10 +184,13 @@ size_t List::remove(const std::string& value){
         head = nodeIndex;
         return numRm;
     }
+    else if(head->next == NULL){
+        return 0;
+    }
 
     while(nodeIndex->next->data != value){ // find first instance
         nodeIndex = nodeIndex->next;
-        if(nodeIndex == NULL){
+        if(nodeIndex->next == NULL){
             return numRm;
         }
     }
