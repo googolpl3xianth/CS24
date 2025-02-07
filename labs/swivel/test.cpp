@@ -6,7 +6,7 @@
 
 int main() {
     Set set;
-    
+    /*
     set.print();
     set.insert("Morris");
     set.insert("Leyland");
@@ -15,11 +15,12 @@ int main() {
     set.insert("Wolseley");
     set.insert("Rover");
     set.insert("Bentley");
-    set.insert("Mercury");
+    set.insert("Mercury");*/
 
     set.debug();
 
-    set.swivel("Bentley");
+    Set copy(set);
     set.debug();
+    copy.debug();
     return 0;
 }

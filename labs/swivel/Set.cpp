@@ -14,6 +14,7 @@ Set::Set(){
     mCount = 0;
 }
 Set::Set(const Set& other){
+    if(other.mRoot == NULL){ mRoot = NULL; mCount = 0; return; }
     mRoot = addNode(other.mRoot);
     mCount = other.mCount;
 }
@@ -166,11 +167,11 @@ bool   Set::swivel(const std::string& value){
         parent = nodeIndex;
 
         if(value < nodeIndex->data){
-            if(nodeIndex->left == NULL){ return 0; } 
+            if(nodeIndex->left == NULL){ swivel(nodeIndex->data); return 0; } 
             nodeIndex = nodeIndex->left;
         }
         else{
-            if(nodeIndex->right == NULL) { return 0; } 
+            if(nodeIndex->right == NULL) { swivel(nodeIndex->data); return 0; } 
             nodeIndex = nodeIndex->right;
         }
     }
