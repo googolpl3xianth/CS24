@@ -109,9 +109,7 @@ void   Set::print() const{
 size_t Set::remove(const std::string& value){
     if(mRoot == NULL){ return 0; }
 
-    while(mRoot->data != value){
-        if(!swivel(value)){ return 0; }
-    }
+    if(!swivel(value)){ return 0; }
 
     if(mCount == 1){
         delete mRoot;
@@ -153,6 +151,7 @@ size_t Set::remove(const std::string& value){
 }
 bool   Set::swivel(const std::string& value){
     if(mRoot == NULL){ return 0; }
+    if(mRoot->data == value){ return 1; }
 
     Node* nodeIndex = mRoot, *parent = mRoot, *temp = mRoot;
     while(nodeIndex != NULL){
@@ -176,9 +175,6 @@ bool   Set::swivel(const std::string& value){
         }
     }
 
-    if(nodeIndex == parent){
-        return 1;
-    }
     if(value < parent->data){
         parent->left = nodeIndex->right;
         nodeIndex->right = parent;
@@ -196,6 +192,6 @@ bool   Set::swivel(const std::string& value){
     else{
         temp->right = nodeIndex;
     }
-    return 1;
+    return swivel(value);
 }
 

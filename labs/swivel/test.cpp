@@ -8,23 +8,18 @@ int main() {
     Set set;
     
     set.print();
-    set.insert("d");
-    set.insert("b");
-    set.insert("e");
-    set.insert("a");
-    set.insert("c");
+    set.insert("Morris");
+    set.insert("Leyland");
+    set.insert("Standard");
+    set.insert("Stright");
+    set.insert("Wolseley");
+    set.insert("Rover");
+    set.insert("Bentley");
+    set.insert("Mercury");
 
     set.debug();
 
-    set.remove("e");
-    set.debug();
-    set.remove("d");
-    set.debug();
-    set.remove("a");
-    set.debug();
-    set.remove("c");
-    set.debug();
-    set.remove("b");
+    set.swivel("Bentley");
     set.debug();
     return 0;
 }
