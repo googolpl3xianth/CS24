@@ -5,9 +5,26 @@
 // This file won't be graded - do whatever you want.
 
 int main() {
-  Set set;
+    Set set;
+    
+    set.print();
+    set.insert("d");
+    set.insert("b");
+    set.insert("e");
+    set.insert("a");
+    set.insert("c");
 
-  std::cout << "This program doesn't do anything interesting yet...\n";
+    set.debug();
 
-  return 0;
+    set.remove("e");
+    set.debug();
+    set.remove("d");
+    set.debug();
+    set.remove("a");
+    set.debug();
+    set.remove("c");
+    set.debug();
+    set.remove("b");
+    set.debug();
+    return 0;
 }
