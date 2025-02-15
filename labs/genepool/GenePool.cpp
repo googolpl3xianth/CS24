@@ -17,7 +17,7 @@ GenePool::GenePool(std::istream& stream){
         if(line[0] != '#' && std::isalpha(line[0])){
             newPerson = new Person;
             while(getline(ss, line, '\t')){
-                std::cout << index << " |" << line << "|" << std::endl;//
+                //std::cout << index << " |" << line << "|" << std::endl;//
                 switch(index){
                     case 0:
                         newPerson->setName(line);
@@ -71,9 +71,9 @@ GenePool::GenePool(std::istream& stream){
             }
         }
     }
-    for(Person* person : everyone()){
+    /*for(Person* person : everyone()){
         std::cout << person->name() << " " << std::endl;
-    }
+    }*///
     //std::cout << "wtf" << std::endl;//
 }
 GenePool::~GenePool(){
