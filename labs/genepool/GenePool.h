@@ -14,7 +14,8 @@
 
 class GenePool {
   // Member Variables
-
+  size_t count;
+  std::set<Person*> mTree; 
   // Helper Functions
 
 public:
