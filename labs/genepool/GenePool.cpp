@@ -60,7 +60,7 @@ GenePool::GenePool(std::istream& stream){
                             newPerson->setFather(temp);
                             temp->addChild(newPerson);
                         }
-                        mTree.insert(newPerson);
+                        mTree[newPerson->name()] = newPerson;
                         count++;
                         index = 0;
                         break;               
@@ -82,15 +82,18 @@ GenePool::~GenePool(){
     }
 }
 std::set<Person*> GenePool::everyone() const{
-    return mTree;
+    std::set<Person*> everyone;
+    for(auto member : mTree){
+        everyone.insert(member.second);
+    }
+    return everyone;
 }
 Person* GenePool::find(const std::string& name) const{
-    for(std::set<Person*>::const_iterator it = mTree.cbegin(); it != mTree.cend(); it++){
-        Person* temp = *it;
-        if(temp->name() == name){
-            return *it;
-        }
+    try{
+        return mTree.at(name);
     }
-    return NULL;
+    catch(const std::out_of_range& e){
+        return NULL;
+    }
 }
 
