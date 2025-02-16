@@ -55,14 +55,14 @@ std::set<Person*> Person::brothers(PMod pmod, SMod smod){
     std::set<Person*> brothers;
     if(mMother != NULL && (pmod == PMod::ANY || pmod == PMod::MATERNAL)){
         for(Person* child : mMother->mChildren){
-            if(child != this && child->mGender == Gender::MALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mFather == mFather) || (smod == SMod::HALF && child->mFather != mFather))){
+            if(child != this && child->mGender == Gender::MALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mFather == mFather && mFather != NULL) || (smod == SMod::HALF && (child->mFather != mFather || mFather == NULL)))){
                 brothers.insert(child);
             }
         }
     }
     if(mFather != NULL && (pmod == PMod::ANY || pmod == PMod::PATERNAL)){
         for(Person* child : mFather->mChildren){
-            if(child != this && child->mGender == Gender::MALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mMother == mMother) || (smod == SMod::HALF && child->mMother != mMother))){
+            if(child != this && child->mGender == Gender::MALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mMother == mMother && mMother != NULL) || (smod == SMod::HALF && (child->mMother != mMother || mMother == NULL)))){
                 brothers.insert(child);
             }
         }
@@ -167,14 +167,14 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod){
     std::set<Person*> siblings;
     if(mMother != NULL && (pmod == PMod::ANY || pmod == PMod::MATERNAL)){
         for(Person* child : mMother->mChildren){
-            if(child != this && (smod == SMod::ANY || (smod == SMod::FULL && child->mFather == mFather) || (smod == SMod::HALF && child->mFather != mFather))){
+            if(child != this && (smod == SMod::ANY || (smod == SMod::FULL && child->mFather == mFather && mFather !=NULL) || (smod == SMod::HALF && (child->mFather != mFather || mFather == NULL)))){
                 siblings.insert(child);
             }
         }
     }
     if(mFather != NULL && (pmod == PMod::ANY || pmod == PMod::PATERNAL)){
         for(Person* child : mFather->mChildren){
-            if(child != this && (smod == SMod::ANY || (smod == SMod::FULL && child->mMother == mMother) || (smod == SMod::HALF && child->mMother != mMother))){
+            if(child != this && (smod == SMod::ANY || (smod == SMod::FULL && child->mMother == mMother && mMother != NULL) || (smod == SMod::HALF && (child->mMother != mMother || mMother == NULL)))){
                 siblings.insert(child);
             }
         }
@@ -185,14 +185,14 @@ std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     std::set<Person*> sisters;
     if(mMother != NULL && (pmod == PMod::ANY || pmod == PMod::MATERNAL)){
         for(Person* child : mMother->mChildren){
-            if(child != this && child->mGender == Gender::FEMALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mFather == mFather) || (smod == SMod::HALF && child->mFather != mFather))){
+            if(child != this && child->mGender == Gender::FEMALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mFather == mFather && mFather != NULL) || (smod == SMod::HALF && (child->mFather != mFather || mFather == NULL)))){
                 sisters.insert(child);
             }
         }
     }
     if(mFather != NULL && (pmod == PMod::ANY || pmod == PMod::PATERNAL)){
         for(Person* child : mFather->mChildren){
-            if(child != this && child->mGender == Gender::FEMALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mMother == mMother) || (smod == SMod::HALF && child->mMother != mMother))){
+            if(child != this && child->mGender == Gender::FEMALE && (smod == SMod::ANY || (smod == SMod::FULL && child->mMother == mMother && mMother != NULL) || (smod == SMod::HALF && (child->mMother != mMother || mMother == NULL)))){
                 sisters.insert(child);
             }
         }

@@ -77,8 +77,8 @@ GenePool::GenePool(std::istream& stream){
     //std::cout << "wtf" << std::endl;//
 }
 GenePool::~GenePool(){
-    for(Person* member : everyone()){
-        delete member;
+    for(auto member : mTree){
+        delete member.second;
     }
 }
 std::set<Person*> GenePool::everyone() const{
