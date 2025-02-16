@@ -51,7 +51,7 @@ GenePool::GenePool(std::istream& stream){
                         index++;
                         break;
                     case 3:
-                        line = line.std::string::substr(0, line.size()-1);
+                        line = line.std::string::substr(0, line.size());
                         if(line == "???"){
                             newPerson->setFather(NULL);
                         }
