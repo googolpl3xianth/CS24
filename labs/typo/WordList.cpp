@@ -31,8 +31,14 @@ Heap WordList::correct(const std::vector<Point>& points, size_t maxcount, float 
                 d = pow(pow(QWERTY[word[i]-97].x-points[i].x, 2) + pow(QWERTY[word[i]-97].y-points[i].y, 2), .5); // ascii a = 97
                 sumScore += 1 / (10 * pow(d, 2) + 1);
             }
-            if(sumScore / word.size() >= cutoff){
-                scores.push(word, sumScore);
+            sumScore /= word.size();
+            if(sumScore >= cutoff){
+                if(scores.count() < scores.capacity()){
+                    scores.push(word, sumScore);
+                }
+                else{
+                    scores.pushpop(word, sumScore);
+                }
             }
         }
     }
