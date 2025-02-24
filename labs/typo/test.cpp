@@ -16,8 +16,12 @@ int main() {
     heap.push("37", 37);
     heap.push("9", 9);
     heap.pushpop("5", 5);
+    heap.pushpop("20", 20);
+    heap.pushpop("9", 9);
+    heap.pushpop("11", 11);
+    heap.pushpop("1", 1);
 
-    std::cout << heap.capacity() << std::endl;
+
 
     /*std::cout << heap.lookup(0).value << std::endl;
     std::cout << heap.lookup(1).value << std::endl;
