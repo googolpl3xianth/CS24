@@ -68,7 +68,12 @@ Heap::~Heap(){
 
 size_t       Heap::capacity() const{ return mCapacity; }
 size_t       Heap::count() const{ return mCount; }
-const Heap::Entry& Heap::lookup(size_t index) const{ return mData[index]; }
+const Heap::Entry& Heap::lookup(size_t index) const{ 
+    if(index >= mCount){ 
+        throw std::out_of_range("Index: " + std::to_string(index) + " Size: " + std::to_string(mCount)); 
+    } 
+    return mData[index]; 
+}
 Heap::Entry        Heap::pop(){
     if(mCount == 0){ throw std::underflow_error("Empty list"); }
 
@@ -99,5 +104,6 @@ void         Heap::push(const std::string& value, float score){
     minSwap(mData, mCount, mCount-1);
 }
 const Heap::Entry& Heap::top() const{
+    if(mCount == 0){ throw std::underflow_error("Empty list"); }
     return mData[0];
 }
