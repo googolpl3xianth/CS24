@@ -61,13 +61,14 @@ void Counter::set(const std::string& key, int count){
 
 Counter::Iterator Counter::begin() const{
     Node *temp = map.getTail();
+    if(temp == NULL){ return NULL; }
     while(temp->prev != NULL){
-        temp = temp -> prev;
+        temp = temp->prev;
     }
     Iterator it(temp);
     return it;
 }
 Counter::Iterator Counter::end() const{
-    Iterator it(map.getTail());
+    Iterator it(NULL);
     return it;
 }
