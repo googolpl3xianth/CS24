@@ -61,13 +61,14 @@ void List::remove(Node *node){
             return;
         }
         tail = tail->prev;
-        delete tail;
+        delete tail->next;
         tail->next = NULL;
         return;
     }
     else if(node->prev == NULL){
         node->next->prev = NULL;
         delete node;
+        return;
     }
     node->prev->next = node->next;
     node->next->prev = node->prev;

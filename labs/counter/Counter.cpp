@@ -26,7 +26,7 @@ void Counter::inc(const std::string& key, int by){
 void Counter::dec(const std::string& key, int by){
     Node *temp = map.get(key);
     if(temp == NULL){
-        map.insert(key, by);
+        map.insert(key, -1*by);
         mCount++;
     }
     else{
@@ -35,6 +35,8 @@ void Counter::dec(const std::string& key, int by){
     mTotal-=by;
 }
 void Counter::del(const std::string& key){
+    mCount--;
+    mTotal -= get(key);
     map.remove(key);
 }
 int  Counter::get(const std::string& key) const{

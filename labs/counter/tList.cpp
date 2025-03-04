@@ -9,9 +9,8 @@ int main(){
     list.insert("nope", 5);
     list.insert("hi", 6);
 
-    list.get("nope");
     
-    std::string s = "nope";
+    std::string s = "hi";
     list.remove(s);
     list.print();
 
