@@ -1,7 +1,6 @@
 #ifndef INDEX_H
 #define INDEX_H
 
-// TODO...
 #include "List.h"
 
 class Hashmap{

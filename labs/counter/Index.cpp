@@ -2,13 +2,13 @@
 
 // Index Member Functions
 Hashmap::Hashmap(){
-    mTable = new *Node[3]{NULL}
+    mTable = new Node*[3]{NULL};
     mCount = 0;
     mCapacity = 2;
 
 }
-Hashmap::Hashmap(const size_t &capacity){
-    mTable = new *Node[capacity]{NULL}
+Hashmap::Hashmap(size_t capacity){
+    mTable = new Node*[capacity]{NULL};
     mCount = 0;
     mCapacity = capacity;
 }
@@ -35,25 +35,26 @@ size_t Hashmap::hash(const std::string &key){
     
     return index;
 }
-Hashmap::Node* Hashmap::get(const std::string &key){
+Node* Hashmap::get(const std::string &key){
     size_t hashIndex = hash(key);
     if(mTable[hashIndex] == NULL){
         return NULL;
     }
     else{
-        return mTable[hashIndex]
+        return mTable[hashIndex];
     }
 }
 void Hashmap::insert(Node *newNode){
     if(mCount+1 >= mCapacity / 2){
         Node **temp = mTable;
-
         mCapacity *= 2;
         mTable = new Node*[mCapacity];
-        for(Node *node : temp){
-            mTable[hash(node->key)] = node;
+        for(size_t i = 0; i < mCount; i++){
+            if(temp[i] == NULL){ continue; }
+            mTable[hash(temp[i]->key)] = temp[i];
         }
+        delete [] temp;
     }
-    count++;
+    mCount++;
     mTable[hash(newNode->key)] = newNode;
 }
