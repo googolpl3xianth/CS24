@@ -28,14 +28,13 @@ size_t Hashmap::hash(const std::string &key, bool insert) const{
     }
 
     index %= mCapacity;
-    while(mTable[index] != NULL && (!insert || !mTable[index]->marked) && mTable[index]->key != key){
+    while(mTable[index] != NULL && !(insert && mTable[index]->marked) && mTable[index]->key != key){
         i++;
         index += i;
         if(index >= mCapacity){
             index -= mCapacity;
         }
     }
-
     //std::cout << "Collisions: " << i << std::endl;//
     return index;
 }
@@ -51,13 +50,13 @@ Node* Hashmap::get(const std::string &key) const{
 void Hashmap::insert(Node *newNode){
     if(mCount+1 > mCapacity / 2){     
         Node **temp = mTable;
-        mTable = new Node*[mCapacity*2]{NULL};
-        for(size_t i = 0; i < mCapacity; i++){
+        mCapacity*=2;
+        mTable = new Node*[mCapacity]{NULL};
+        for(size_t i = 0; i < mCapacity/2; i++){
             if(temp[i] == NULL || temp[i]->marked){ continue; }
             mTable[hash(temp[i]->key)] = temp[i];
         }
         delete [] temp;
-        mCapacity*=2;
     }
     mCount++;
     mTable[hash(newNode->key, true)] = newNode;
