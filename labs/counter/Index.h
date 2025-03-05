@@ -11,12 +11,15 @@ class Hashmap{
 
         size_t count();
         size_t capacity();
-        size_t hash(const std::string &key);
-        Node* get(const std::string &key);
+        size_t hash(const std::string &key, bool insert = false) const;
+        Node* get(const std::string &key) const;
         void insert(Node *newNode);
+        int remove(const std::string &key);
+        void print();
 
     private:
         Node **mTable;
+        Node *markNode;
         size_t mCount;
         size_t mCapacity;
 };

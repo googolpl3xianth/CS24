@@ -4,16 +4,26 @@
 #include <string>
 #include <iostream>
 struct Node{
-    Node *next;
-    Node *prev;
+    Node *next = NULL;
+    Node *prev = NULL;
     std::string key;
     int value;
-
+    bool marked;
+    
+    Node(){
+        key = "";
+        value = 0;
+        marked = false;
+    }
+    Node(bool mark){
+        key = "";
+        value = 0;
+        marked = mark;
+    }
     Node(const std::string &newKey, int newValue){
-        next = NULL;
-        prev = NULL;
         key = newKey;
         value = newValue;
+        marked = false;
     }
     void print() const{
         std::cout << "[" << key << ", " << value << "]" << std::endl;

@@ -5,6 +5,7 @@
 #include <string>
 
 #include "List.h"
+#include "Index.h"
 
 // This is the Counter class you need to implement.
 // It includes the Counter::Iterator as a nested class.
@@ -28,7 +29,8 @@ public:
 private:
   size_t mCount;
   int mTotal;
-  List map;
+  List list;
+  Hashmap map;
 
 private:
   // Helper Functions

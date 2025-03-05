@@ -3,41 +3,45 @@
 // Index Member Functions
 Hashmap::Hashmap(){
     mTable = new Node*[3]{NULL};
+    markNode = new Node(true);
     mCount = 0;
-    mCapacity = 2;
+    mCapacity = 3;
 
 }
 Hashmap::Hashmap(size_t capacity){
     mTable = new Node*[capacity]{NULL};
+    markNode = new Node(true);
     mCount = 0;
     mCapacity = capacity;
 }
 Hashmap::~Hashmap(){
     delete [] mTable;
+    delete markNode;
 }
 
 size_t Hashmap::count(){ return mCount; }
 size_t Hashmap::capacity(){ return mCapacity; }
-size_t Hashmap::hash(const std::string &key){
+size_t Hashmap::hash(const std::string &key, bool insert) const{
     size_t index = 0, i = 0;
     for(char a : key){
         index += a;
     }
 
     index %= mCapacity;
-    while(mTable[index] != NULL && mTable[index]->key != key){
+    while(mTable[index] != NULL && (!insert || mTable[index] == markNode) && mTable[index]->key != key){
         i++;
         index += i;
         if(index >= mCapacity){
             index -= mCapacity;
         }
     }
-    
+
+    //std::cout << "Collisions: " << i << std::endl;//
     return index;
 }
-Node* Hashmap::get(const std::string &key){
+Node* Hashmap::get(const std::string &key) const{
     size_t hashIndex = hash(key);
-    if(mTable[hashIndex] == NULL){
+    if(mTable[hashIndex] == NULL || mTable[hashIndex] == markNode){
         return NULL;
     }
     else{
@@ -45,16 +49,34 @@ Node* Hashmap::get(const std::string &key){
     }
 }
 void Hashmap::insert(Node *newNode){
-    if(mCount+1 >= mCapacity / 2){
+    if(mCount+1 > mCapacity / 2){
         Node **temp = mTable;
-        mCapacity *= 2;
-        mTable = new Node*[mCapacity];
-        for(size_t i = 0; i < mCount; i++){
-            if(temp[i] == NULL){ continue; }
+        mTable = new Node*[mCapacity*2]{NULL};
+        for(size_t i = 0; i < mCapacity; i++){
+            if(temp[i] == NULL || temp[i] == markNode){ continue; }
             mTable[hash(temp[i]->key)] = temp[i];
         }
+        mCapacity*=2;
         delete [] temp;
     }
     mCount++;
-    mTable[hash(newNode->key)] = newNode;
+    mTable[hash(newNode->key, true)] = newNode;
+}
+int Hashmap::remove(const std::string &key){
+    size_t temp = hash(key);
+    int tempCount = mTable[temp]->value;
+
+    mTable[temp] = markNode;
+    return tempCount;
+}
+void Hashmap::print(){
+    for(size_t i = 0; i < mCapacity; i++){
+        if(mTable[i] == NULL || mTable[i] == markNode){
+            std::cout << "NULL ";
+        }
+        else{
+            std::cout << mTable[i]->key << " ";
+        }
+    }
+    std::cout << std::endl;
 }

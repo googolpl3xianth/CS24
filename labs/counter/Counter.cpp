@@ -15,7 +15,9 @@ int    Counter::total() const{ return mTotal; }
 void Counter::inc(const std::string& key, int by){
     Node *temp = map.get(key);
     if(temp == NULL){
-        map.insert(key, by);
+        temp = new Node(key, by);
+        map.insert(temp);
+        list.insert(temp);
         mCount++;
     }
     else{
@@ -26,7 +28,9 @@ void Counter::inc(const std::string& key, int by){
 void Counter::dec(const std::string& key, int by){
     Node *temp = map.get(key);
     if(temp == NULL){
-        map.insert(key, -1*by);
+        temp = new Node(key, -1*by);
+        map.insert(temp);
+        list.insert(temp);
         mCount++;
     }
     else{
@@ -38,6 +42,7 @@ void Counter::del(const std::string& key){
     mCount--;
     mTotal -= get(key);
     map.remove(key);
+    list.remove(key);
 }
 int  Counter::get(const std::string& key) const{
     Node *temp = map.get(key);
@@ -51,7 +56,9 @@ int  Counter::get(const std::string& key) const{
 void Counter::set(const std::string& key, int count){
     Node *temp = map.get(key);
     if(temp == NULL){
-        map.insert(key, count);
+        temp = new Node(key, count);
+        map.insert(temp);
+        list.insert(temp);
         mCount++;
         mTotal += count;
     }
@@ -62,7 +69,7 @@ void Counter::set(const std::string& key, int count){
 }
 
 Counter::Iterator Counter::begin() const{
-    Node *temp = map.getTail();
+    Node *temp = list.getTail();
     if(temp == NULL){ return NULL; }
     while(temp->prev != NULL){
         temp = temp->prev;
