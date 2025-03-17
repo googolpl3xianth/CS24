@@ -52,10 +52,10 @@ int main(int argc, char** argv) {
 
       std::cout << map.route(src, dst) << '\n';
 
-      //auto end = std::chrono::high_resolution_clock::now();//
-      //std::chrono::duration<double> elapsed = end - start;//
+      /*auto end = std::chrono::high_resolution_clock::now();//
+      std::chrono::duration<double> elapsed = end - start;//
 
-      //std::cout << "Execution time: " << elapsed.count() << " seconds" << std::endl;//
+      std::cout << "Execution time: " << elapsed.count() << " seconds" << std::endl;*///
 
     }
     catch(const RouteError& e) {

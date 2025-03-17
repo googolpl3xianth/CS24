@@ -25,7 +25,7 @@ bool Map::move(Point *&pt, char dir){
 
 void checkPath(std::priority_queue<Path, std::vector<Path>, ComparePoints>& Q, Path pa, Point *pt, char dir){
     if(pt->value == '.')                     { Q.push(Path(pa, pt, dir));     }
-    else if(pt->value == '*')                { Q.push(Path(pa, pt, dir, 1));  }
+    else if(pt->value == '*')                { Q.push(Path(pa, pt, dir, pa.B.find(pt) == pa.B.end()));  }
     else if(pt->value == '#' && pa.bombs > 0){ Q.push(Path(pa, pt, dir, -1)); }
 }
 
@@ -49,6 +49,12 @@ Map::Map(std::istream& stream){
             lng++;
         }
     }
+    /*for(size_t i = 0; i < grid.size(); i++){
+        for(size_t j = 0; j < grid[0].size(); j++){
+            std::cout << grid[i][j]->value;
+        }
+        std::cout << std::endl;
+    }*///
 }
 Map::~Map(){
     for(size_t i = 0; i < grid.size(); i++){
@@ -66,7 +72,7 @@ std::string Map::route(Point src, Point dst){
     // Variables
     std::priority_queue<Path, std::vector<Path>, ComparePoints> Q;
     std::unordered_map<Point*, int> searched;
-    Point *current = &src, *index;
+    Point *current = grid[src.lat][src.lng], *index;
     char dir[4] = {'n','e','s','w'};
     
     // Initialize
@@ -79,16 +85,17 @@ std::string Map::route(Point src, Point dst){
         Q.pop();
         for(size_t i = 0; i < 4; i++){
             index = current;
-            if(move(index, dir[i])){           
-                if(searched.find(index) == searched.end()){
+            if(move(index, dir[i])){
+                auto pair = searched.find(index);
+                if(pair == searched.end()){
                     index->setMag(dst);
                     checkPath(Q, temp, index, dir[i]);
                     searched.insert({index, temp.bombs + (index->value == '*') - (index->value == '#')});
                 }
-                else if(index->value != '*' && searched.find(index)->second < temp.bombs){
+                else if(pair->second < temp.bombs + (index->value == '*') - (temp.B.find(pair->first) != temp.B.end())){
                     index->setMag(dst);
                     checkPath(Q, temp, index, dir[i]);
-                    searched.at(index) = temp.bombs;
+                    searched.at(index) = temp.bombs + (index->value == '*') - (temp.B.find(pair->first) != temp.B.end());
                 }
             }
         }

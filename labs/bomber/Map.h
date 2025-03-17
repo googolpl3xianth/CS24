@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 #include "Point.h"
 #include "Errors.h"
@@ -26,23 +27,30 @@ struct Path{
     std::string dir = "";
     Point *pt;
     int bombs = 0;
+    std::unordered_set<Point*> B;
     Path(Point *newPt){
         pt = newPt;
-        bombs = pt->value == '*';
+        if(pt->value == '*'){
+            bombs = 1;
+            B.insert(newPt);
+        }
     }
     Path(Path pa, Point *newPt, char newDir, int bomb=0){
         pt = newPt;
         dir = pa.dir + newDir;
         bombs = pa.bombs + bomb;
+        B = pa.B;
+        if(bomb == 1){
+            B.insert(newPt);
+        }
     }
 };
 
 struct ComparePoints{
     bool operator()(const Path &p1, const Path &p2){
-        if(p1.bombs != p2.bombs){
-            return p1.bombs < p2.bombs;
-        }
-        return p1.pt->mag > p2.pt->mag;
+        if(p1.pt->mag > p2.pt->mag){       return true;                }
+        else if(p1.pt->mag == p2.pt->mag){ return p1.bombs < p2.bombs; }
+        else{                              return false;               }
     }
 };
 
