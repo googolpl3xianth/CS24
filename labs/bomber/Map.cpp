@@ -99,8 +99,10 @@ std::string Map::route(Point src, Point dst){
                 }
             }
         }
-        temp = Q.top();
-        current = temp.pt;
+        if(!Q.empty()){
+            temp = Q.top();
+            current = temp.pt;
+        }
     }
     
     if(Q.empty()){ throw RouteError(src, dst); } // no Route found
