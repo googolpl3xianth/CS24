@@ -24,9 +24,9 @@ bool Map::move(Point *&pt, char dir){
 }
 
 void checkPath(std::priority_queue<Path, std::vector<Path>, ComparePoints>& Q, Path pa, Point *pt, char dir){
-    if(pt->value == '.')                     { Q.push(Path(pa, pt, dir));     }
-    else if(pt->value == '*')                { Q.push(Path(pa, pt, dir, pa.B.find(pt) == pa.B.end()));  }
-    else if(pt->value == '#' && pa.bombs > 0){ Q.push(Path(pa, pt, dir, -1)); }
+    if(pt->value == '.')                     { Q.push(Path(pa, pt, dir));                                 }
+    else if(pt->value == '*')                { Q.push(Path(pa, pt, dir, pa.B.find(pt) == pa.B.end()));    }
+    else if(pt->value == '#' && pa.bombs > 0){ Q.push(Path(pa, pt, dir, (pa.W.find(pt) == pa.W.end())*-1)); }
 }
 
 // Member Functions
@@ -92,10 +92,10 @@ std::string Map::route(Point src, Point dst){
                     checkPath(Q, temp, index, dir[i]);
                     searched.insert({index, temp.bombs + (index->value == '*') - (index->value == '#')});
                 }
-                else if(pair->second < temp.bombs + (index->value == '*') - (temp.B.find(pair->first) != temp.B.end())){
+                else if(pair->second < temp.bombs + (index->value == '*') - (index->value == '#') - (temp.B.find(pair->first) != temp.B.end()) + (temp.W.find(pair->first) != temp.W.end())){
                     index->setMag(dst);
                     checkPath(Q, temp, index, dir[i]);
-                    searched.at(index) = temp.bombs + (index->value == '*') - (temp.B.find(pair->first) != temp.B.end());
+                    searched.at(index) = temp.bombs + (index->value == '*') - (index->value == '#') - (temp.B.find(pair->first) != temp.B.end()) + (temp.W.find(pair->first) != temp.W.end());
                 }
             }
         }

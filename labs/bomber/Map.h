@@ -27,7 +27,8 @@ struct Path{
     std::string dir = "";
     Point *pt;
     int bombs = 0;
-    std::unordered_set<Point*> B;
+    std::unordered_set<Point*> B; // bombs collected
+    std::unordered_set<Point*> W; // walls destroyed
     Path(Point *newPt){
         pt = newPt;
         if(pt->value == '*'){
@@ -40,8 +41,12 @@ struct Path{
         dir = pa.dir + newDir;
         bombs = pa.bombs + bomb;
         B = pa.B;
+        W = pa.W;
         if(bomb == 1){
             B.insert(newPt);
+        }
+        else if(bomb == -1){
+            W.insert(newPt);
         }
     }
 };
