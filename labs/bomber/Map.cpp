@@ -43,7 +43,7 @@ Map::Map(std::istream& stream){
             lat++;
             lng = 0;
         }
-        else{
+        else if(temp != '\r'){
             tempPt = new Point(lat, lng, temp);
             tempRow.push_back(tempPt);
             lng++;

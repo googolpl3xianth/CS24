@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream>
+#include <chrono>
 
 #include "Errors.h"
 #include "Map.h"
@@ -48,7 +48,15 @@ int main(int argc, char** argv) {
     }
 
     try {
+      //auto start = std::chrono::high_resolution_clock::now();//
+
       std::cout << map.route(src, dst) << '\n';
+
+      //auto end = std::chrono::high_resolution_clock::now();//
+      //std::chrono::duration<double> elapsed = end - start;//
+
+      //std::cout << "Execution time: " << elapsed.count() << " seconds" << std::endl;//
+
     }
     catch(const RouteError& e) {
       std::cout << "No route from " << e.src << " to " << e.dst << ".\n";
