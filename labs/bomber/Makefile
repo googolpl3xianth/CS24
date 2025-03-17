@@ -10,4 +10,4 @@ bomber.o: main.cpp Point.h Map.h Errors.h
 	${CXX} $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm *.o bomber
+	rm -f *.o bomber
